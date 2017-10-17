@@ -76,5 +76,45 @@ describe ToyRobotSimulator do
     end
     
   end
+  
+  it "be able to run execute_place_command when given a valid x and y position" do
+    
+    # make sure point_x, point_y and facing_at are initialize state of nil
+    expect(@toy_robot.point_x  ).to eq nil
+    expect(@toy_robot.point_y  ).to eq nil
+    expect(@toy_robot.facing_at).to eq nil  
+    
+    # call execute_place_command and set position to the origin position and facing north
+    result = @toy_robot.execute_place_command(0, 0, "north")
+    
+    expect(result              ).to eq true
+    expect(@toy_robot.point_x  ).to eq 0
+    expect(@toy_robot.point_y  ).to eq 0
+    expect(@toy_robot.facing_at).to eq "NORTH"
+    
+    # call execute_place_command and give a new position and now facing west
+    result = @toy_robot.execute_place_command(4, 0, "west")
+    
+    expect(result              ).to eq true
+    expect(@toy_robot.point_x  ).to eq 4
+    expect(@toy_robot.point_y  ).to eq 0
+    expect(@toy_robot.facing_at).to eq "WEST"
+      
+    # call execute_place_command and give a new position and now facing west
+    result = @toy_robot.execute_place_command(4, 4, "south")
+    
+    expect(result              ).to eq true
+    expect(@toy_robot.point_x  ).to eq 4
+    expect(@toy_robot.point_y  ).to eq 4
+    expect(@toy_robot.facing_at).to eq "SOUTH"
+    
+    # call execute_place_command and give a new position and now facing west
+    result = @toy_robot.execute_place_command(0, 4, "east")
+    
+    expect(result              ).to eq true
+    expect(@toy_robot.point_x  ).to eq 0
+    expect(@toy_robot.point_y  ).to eq 4
+    expect(@toy_robot.facing_at).to eq "EAST"
+  end
 
 end

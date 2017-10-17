@@ -7,19 +7,23 @@ end
 
 class ToyRobotSimulator
   
+  attr_reader :point_x
+  attr_reader :point_y
+  attr_reader :facing_at
+  
   def initialize
-    @x_coordinate = nil
-    @y_coordinate = nil
-    @facing       = nil
+    @point_x   = nil
+    @point_y   = nil
+    @facing_at = nil
   end  
   
   def main
-    while (entered_command = command_prompt("Enter command: ")).downcase != "quit" do
-      result = process_command(entered_command)
-       if result[:validity]
-        case result[:command]
+    while (entered_command = command_prompt("('QUIT' to exit): ")).downcase != "quit" do
+      processed_result = process_command(entered_command)
+       if processed_result[:validity]
+        case processed_result[:command]
         when :place
-          execute_place_command(result[:x_coordinate], result[:y_coordinate], result[:facing])
+          execute_place_command(processed_result[:point_x], processed_result[:point_y], processed_result[:facing_at])
         when :move
           execute_move_command
         when :left
@@ -50,19 +54,19 @@ class ToyRobotSimulator
 
     if command.scan(/^PLACE\s\d{1},\d{1},(NORTH|SOUTH|WEST|EAST)/i).empty? == false
       
-      x_coordinate = command.scan(/\d{1}/)[0].to_i
-      y_coordinate = command.scan(/\d{1}/)[1].to_i
+      point_x = command.scan(/\d{1}/)[0].to_i
+      point_y = command.scan(/\d{1}/)[1].to_i
       
       extracted = command.scan(/(NORTH\z|SOUTH\z|WEST\z|EAST\z)/i)
       facing_at = extracted.empty? ? nil : extracted[0]
 
-      if (0..4).cover?(x_coordinate) && (0..4).cover?(y_coordinate) && facing_at.nil? == false
+      if (0..4).cover?(point_x) && (0..4).cover?(point_y) && facing_at.nil? == false
         result = { 
-          validity:     true, 
-          command:      :place, 
-          x_coordinate: x_coordinate, 
-          y_coordinate: y_coordinate, 
-          facing:       facing_at, 
+          validity:  true, 
+          command:   :place, 
+          point_x:   point_x, 
+          point_y:   point_y, 
+          facing_at: facing_at, 
         }
       else
         result = { validity: false }
@@ -87,8 +91,20 @@ class ToyRobotSimulator
     return result      
   end 
   
-  def execute_place_command(x_coordinate, y_coordinate, facing_at)
-    puts "@DEBUG #{__LINE__}    Running execute_place_command..."
+  def execute_place_command(point_x, point_y, facing_at)
+    status = false
+    if (0..4).cover?(point_x) && (0..4).cover?(point_y)
+
+      # make sure the value of facing_at is a valid compass direction
+      if ["north", "south", "west", "east"].include?(facing_at.downcase)
+        @point_x   = point_x
+        @point_y   = point_y
+        @facing_at = facing_at.upcase
+        status     = true
+      end
+    end  
+
+    return status
   end
   
   def execute_move_command 
