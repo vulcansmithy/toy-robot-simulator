@@ -15,10 +15,21 @@ class ToyRobotSimulator
   
   def main
     while (entered_command = command_prompt("Enter command: ")).downcase != "quit" do
-      if process_command(entered_command)
-        puts "#{entered_command}..."
+      result = process_command(entered_command)
+       if result[:validity]
+        case result[:command]
+        when :place
+          execute_place_command(result[:x_coordinate], result[:y_coordinate], result[:facing])
+        when :move
+          execute_move_command
+        when :left
+          execute_left_command
+        when :right
+          execute_right_command
+        when :report
+          execute_report_command
+        end
       end  
-      
     end
     
     return 0
@@ -26,7 +37,7 @@ class ToyRobotSimulator
   
   def command_prompt(prompt_message="")
     print "#{prompt_message} "
-#    STDOUT.flush  
+    STDOUT.flush  
     entry = gets.chomp 
     
     return entry
@@ -48,7 +59,7 @@ class ToyRobotSimulator
       if (0..4).cover?(x_coordinate) && (0..4).cover?(y_coordinate) && facing_at.nil? == false
         result = { 
           validity:     true, 
-          commmand:     :place, 
+          command:      :place, 
           x_coordinate: x_coordinate, 
           y_coordinate: y_coordinate, 
           facing:       facing_at, 
@@ -75,5 +86,25 @@ class ToyRobotSimulator
     
     return result      
   end 
+  
+  def execute_place_command(x_coordinate, y_coordinate, facing_at)
+    puts "@DEBUG #{__LINE__}    Running execute_place_command..."
+  end
+  
+  def execute_move_command 
+    puts "@DEBUG #{__LINE__}    Running move_command..."
+  end
 
+  def execute_left_command 
+    puts "@DEBUG #{__LINE__}    Running left_command..."
+  end
+  
+  def execute_right_command 
+    puts "@DEBUG #{__LINE__}    Running right_command..."
+  end
+  
+  def execute_report_command 
+    puts "@DEBUG #{__LINE__}    Running report_command..."
+  end
+  
 end
