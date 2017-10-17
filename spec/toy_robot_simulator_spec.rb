@@ -157,4 +157,16 @@ describe ToyRobotSimulator do
     expect(@toy_robot.facing_at).to eq "NORTH"
   end
 
+  it "should ignore the command execute_reporte_commmand when called with x and y position not yet set" do
+    
+    # make sure point_x, point_y and facing_at are initialize state of nil
+    expect(@toy_robot.point_x  ).to eq nil
+    expect(@toy_robot.point_y  ).to eq nil
+    expect(@toy_robot.facing_at).to eq nil
+    
+    # call execute_report_command
+    result = @toy_robot.execute_report_command
+    
+    expect(result).to eq false
+  end
 end

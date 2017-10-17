@@ -120,7 +120,13 @@ class ToyRobotSimulator
   end
   
   def execute_report_command 
-    puts "@DEBUG #{__LINE__}    Running report_command..."
+    status = false
+    if @point_x.nil? == false && @point_y.nil? == false
+      puts "OUTPUT: #{@point_x},#{@point_y},#{@facing_at}"
+      status = true
+    end    
+
+    return status
   end
   
 end
