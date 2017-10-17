@@ -24,4 +24,24 @@ class ToyRobotSimulator
     return entry
   end
   
+  def process_command(command)
+    command.downcase!
+    
+    if command.scan(/^place/i).first == "place"
+      return true
+    elsif command.scan(/^move/i).first == "move"  
+      return true
+    elsif command.scan(/^left/i).first == "left"
+      return true
+    elsif command.scan(/^right/i).first == "right"
+      return true  
+    elsif command.scan(/^report/i).first == "report"
+      return true
+    elsif command.scan(/^quit/i).first == "quit" 
+      return true
+    else
+      return false
+    end           
+  end  
+  
 end

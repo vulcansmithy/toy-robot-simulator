@@ -8,7 +8,7 @@ describe ToyRobotSimulator do
   
   it "be able proccess a valid 'place' command" do
     command = "place 0,0,north"  
-    expect(@toy_robot.proccess_command(command)).to eq true
+    expect(@toy_robot.process_command(command)).to eq true
   end
 
 end
