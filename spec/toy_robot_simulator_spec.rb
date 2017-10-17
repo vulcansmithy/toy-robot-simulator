@@ -17,7 +17,8 @@ describe ToyRobotSimulator do
     ]
     
     valid_commands.each do |command|
-      expect(@toy_robot.process_command(command)).to eq true  
+      result = @toy_robot.process_command(command)
+      expect(result[:validity]).to eq true  
     end
   end
   
@@ -28,7 +29,8 @@ describe ToyRobotSimulator do
       "PLACE 0,0,WEST",
       "PLACE 0,0,EAST",
     ].each do |command|
-      expect(@toy_robot.process_command(command)).to  eq true  
+      result = @toy_robot.process_command(command)
+      expect(result[:validity]).to  eq true  
     end
     
     
@@ -52,7 +54,8 @@ describe ToyRobotSimulator do
       "PLACE 0,0,LOREM",
       "PLACE 0,0,sout",
     ].each do |command|
-      expect(@toy_robot.process_command(command)).to  eq false  
+      result = @toy_robot.process_command(command)
+      expect(result[:validity]).to  eq false  
     end
     
   end

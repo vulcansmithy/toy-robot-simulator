@@ -15,7 +15,10 @@ class ToyRobotSimulator
   
   def main
     while (entered_command = command_prompt("Enter command: ")).downcase != "quit" do
-      puts "You entered '#{entered_command}'..."
+      if process_command(entered_command)
+        puts "#{entered_command}..."
+      end  
+      
     end
     
     return 0
@@ -30,24 +33,31 @@ class ToyRobotSimulator
   end
   
   def process_command(command)
+    result = { validity: false }
+    
     validity = false
     command.downcase!
     
     if command.scan(/^PLACE\s\d{1},\d{1},(NORTH|SOUTH|WEST|EAST)/i).empty? == false
-      validity = true
-    elsif command.scan(/^move/i).first == "move"  
-      validity = true
+      result = { validity: true, command: :place }
+      
+    elsif command.scan(/^move/i).first == "move"
+      result = { validity: true, command: :move }
+
     elsif command.scan(/^left/i).first == "left"
-      validity = true
+      result = { validity: true, command: :left }
+
     elsif command.scan(/^right/i).first == "right"
-      validity = true 
+      result = { validity: true, command: :right }
+
     elsif command.scan(/^report/i).first == "report"
-      validity = true
-    elsif command.scan(/^quit/i).first == "quit" 
-      validity = true
+      result = { validity: true, command: :report }
+
+    elsif command.scan(/^quit/i).first == "quit"
+      result = { validity: true, command: :quit }
     end
     
-    return validity       
+    return result      
   end  
   
 end
