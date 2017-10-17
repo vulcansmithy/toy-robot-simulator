@@ -58,7 +58,7 @@ class ToyRobotSimulator
       point_y = command.scan(/\d{1}/)[1].to_i
       
       extracted = command.scan(/(NORTH\z|SOUTH\z|WEST\z|EAST\z)/i)
-      facing_at = extracted.empty? ? nil : extracted[0]
+      facing_at = extracted.empty? ? nil : (extracted[0])[0]
 
       if (0..4).cover?(point_x) && (0..4).cover?(point_y) && facing_at.nil? == false
         result = { 
