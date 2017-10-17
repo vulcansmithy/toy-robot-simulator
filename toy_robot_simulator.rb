@@ -26,7 +26,7 @@ class ToyRobotSimulator
   
   def command_prompt(prompt_message="")
     print "#{prompt_message} "
-    STDOUT.flush  
+#    STDOUT.flush  
     entry = gets.chomp 
     
     return entry
@@ -34,13 +34,29 @@ class ToyRobotSimulator
   
   def process_command(command)
     result = { validity: false }
-    
 
     command.downcase!
-    
-    if command.scan(/^PLACE\s\d{1},\d{1},(NORTH\z|SOUTH\z|WEST\z|EAST\z)/i).empty? == false
-      result = { validity: true, command: :place }
+
+    if command.scan(/^PLACE\s\d{1},\d{1},(NORTH|SOUTH|WEST|EAST)/i).empty? == false
       
+      x_coordinate = command.scan(/\d{1}/)[0].to_i
+      y_coordinate = command.scan(/\d{1}/)[1].to_i
+      
+      extracted = command.scan(/(NORTH\z|SOUTH\z|WEST\z|EAST\z)/i)
+      facing_at = extracted.empty? ? nil : extracted[0]
+
+      if (0..4).cover?(x_coordinate) && (0..4).cover?(y_coordinate) && facing_at.nil? == false
+        result = { 
+          validity:     true, 
+          commmand:     :place, 
+          x_coordinate: x_coordinate, 
+          y_coordinate: y_coordinate, 
+          facing:       facing_at, 
+        }
+      else
+        result = { validity: false }
+      end 
+
     elsif command.scan(/^move/i).first == "move"
       result = { validity: true, command: :move }
 
@@ -58,6 +74,6 @@ class ToyRobotSimulator
     end
     
     return result      
-  end  
-  
+  end 
+
 end

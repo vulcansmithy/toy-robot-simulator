@@ -28,6 +28,11 @@ describe ToyRobotSimulator do
       "PLACE 0,0,SOUTH",
       "PLACE 0,0,WEST",
       "PLACE 0,0,EAST",
+
+      "PLACE 4,4,NORTH",
+      "PLACE 4,4,SOUTH",
+      "PLACE 4,4,WEST",
+      "PLACE 4,4,EAST",
     ].each do |command|
       result = @toy_robot.process_command(command)
       expect(result[:validity]).to  eq true  
@@ -59,6 +64,11 @@ describe ToyRobotSimulator do
       "PLACE 0,0,southh",
       "PLACE 0,0,westT",
       "Place 0,0,EASTt",
+      
+      # expect to catch out of bound coordinates
+      "PLACE 5,4,NORTH",
+      "PLACE 4,5,NORTH",
+      "PLACE 9,9,NORTH",
       
     ].each do |command|
       result = @toy_robot.process_command(command)
