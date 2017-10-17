@@ -7,6 +7,12 @@ end
 
 class ToyRobotSimulator
   
+  def initialize
+    @x_coordinate = nil
+    @y_coordinate = nil
+    @facing       = nil
+  end  
+  
   def main
     while (entered_command = command_prompt("Enter command: ")).downcase != "quit" do
       puts "You entered '#{entered_command}'..."
