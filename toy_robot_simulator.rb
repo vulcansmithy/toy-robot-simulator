@@ -8,9 +8,20 @@ end
 class ToyRobotSimulator
   
   def main
-    puts "@DEBUG #{__LINE__}    Running inside main..."
+    
+    while (entry = command_prompt("Enter command: ")).downcase != "quit" do
+      puts "You entered '#{entry}'..."
+    end
     
     return 0
   end  
+  
+  def command_prompt(prompt_message="")
+    print "#{prompt_message} "
+    STDOUT.flush  
+    entry = gets.chomp 
+    
+    return entry
+  end
   
 end
