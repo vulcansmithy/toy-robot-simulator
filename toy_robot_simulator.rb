@@ -8,9 +8,8 @@ end
 class ToyRobotSimulator
   
   def main
-    
-    while (entry = command_prompt("Enter command: ")).downcase != "quit" do
-      puts "You entered '#{entry}'..."
+    while (entered_command = command_prompt("Enter command: ")).downcase != "quit" do
+      puts "You entered '#{entered_command}'..."
     end
     
     return 0
