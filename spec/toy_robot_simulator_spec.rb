@@ -77,7 +77,7 @@ describe ToyRobotSimulator do
     
   end
   
-  it "be able to run execute_place_command when given a valid x and y position" do
+  it "should be able to successfully run execute_place_command with a valid x and y position" do
     
     # make sure point_x, point_y and facing_at are initialize state of nil
     expect(@toy_robot.point_x  ).to eq nil
