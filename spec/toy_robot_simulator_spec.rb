@@ -77,7 +77,7 @@ describe ToyRobotSimulator do
     
   end
   
-  it "should be able to successfully run execute_place_command with a valid x and y position" do
+  it "should be able to successfully call execute_place_command with a valid x and y position" do
     
     # make sure point_x, point_y and facing_at are initialize state of nil
     expect(@toy_robot.point_x  ).to eq nil
@@ -117,7 +117,7 @@ describe ToyRobotSimulator do
     expect(@toy_robot.facing_at).to eq "EAST"
   end
   
-  it "should ignore the command when running execute_place_command when given an out of bound x and y position" do
+  it "should ignore the command when calling the execute_place_command when given an x and y position is out of bound" do
     
     # make sure point_x, point_y and facing_at are initialize state of nil
     expect(@toy_robot.point_x  ).to eq nil
@@ -157,7 +157,7 @@ describe ToyRobotSimulator do
     expect(@toy_robot.facing_at).to eq "NORTH"
   end
 
-  it "should ignore the command execute_reporte_commmand when called with x and y position not yet set" do
+  it "should ignore the command execute_report_commmand when the current x and y position is not yet set with initial place position" do
     
     # make sure point_x, point_y and facing_at are initialize state of nil
     expect(@toy_robot.point_x  ).to eq nil
@@ -170,7 +170,7 @@ describe ToyRobotSimulator do
     expect(result).to eq false
   end
   
-  it "should be able to successfully call execute_move_command without falling off the table" do
+  it "should be able to successfully call execute_move_command without the robot falling off the table" do
     
     # set the position to the bottom left corner and have it facing north
     @toy_robot.execute_place_command(0, 0, "north")
