@@ -53,6 +53,13 @@ describe ToyRobotSimulator do
       # expect the facing value to only be 'NORTH', 'SOUTH', 'WEST', and 'EAST'
       "PLACE 0,0,LOREM",
       "PLACE 0,0,sout",
+      
+      # expect to catch typo on facing value
+      "PLACE 0,0,NORTHH",
+      "PLACE 0,0,southh",
+      "PLACE 0,0,westT",
+      "Place 0,0,EASTt",
+      
     ].each do |command|
       result = @toy_robot.process_command(command)
       expect(result[:validity]).to  eq false  

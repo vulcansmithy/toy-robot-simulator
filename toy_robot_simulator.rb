@@ -35,10 +35,10 @@ class ToyRobotSimulator
   def process_command(command)
     result = { validity: false }
     
-    validity = false
+
     command.downcase!
     
-    if command.scan(/^PLACE\s\d{1},\d{1},(NORTH|SOUTH|WEST|EAST)/i).empty? == false
+    if command.scan(/^PLACE\s\d{1},\d{1},(NORTH\z|SOUTH\z|WEST\z|EAST\z)/i).empty? == false
       result = { validity: true, command: :place }
       
     elsif command.scan(/^move/i).first == "move"
