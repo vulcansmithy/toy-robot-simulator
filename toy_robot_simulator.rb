@@ -167,7 +167,25 @@ class ToyRobotSimulator
   end
   
   def execute_right_command 
-    puts "@DEBUG #{__LINE__}    Running right_command..."
+    status = false
+    if @point_x.nil? == false && @point_y.nil? == false
+      case @facing_at
+      when "NORTH"
+        @facing_at = "EAST"
+        status = true
+      when "EAST"
+        @facing_at = "SOUTH"
+        status = true
+      when "SOUTH"
+        @facing_at = "WEST"   
+        status = true
+      when "WEST"
+        @facing_at = "NORTH"
+        status = true
+      end     
+    end    
+
+    return status
   end
   
   def execute_report_command 

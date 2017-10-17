@@ -251,37 +251,72 @@ describe ToyRobotSimulator do
     expect(@toy_robot.point_y).to eq 0
   end
   
-  it "should be able to successfully call execute_left_command and face at the correct direction" do
+  it "should be able to successfully call execute_left_command and the robot will be facing at the right direction" do
     
-    # set the position to the bottom left corner and have it facing north
-    @toy_robot.execute_place_command(0, 0, "north")
+    # set the position at middle of the table
+    @toy_robot.execute_place_command(2, 2, "north")
     
     # turn left
     @toy_robot.execute_left_command
     
-    expect(@toy_robot.point_x  ).to eq 0
-    expect(@toy_robot.point_y  ).to eq 0
+    expect(@toy_robot.point_x  ).to eq 2
+    expect(@toy_robot.point_y  ).to eq 2
     expect(@toy_robot.facing_at).to eq "WEST"
     
     # turn left again
     @toy_robot.execute_left_command
     
-    expect(@toy_robot.point_x  ).to eq 0
-    expect(@toy_robot.point_y  ).to eq 0
+    expect(@toy_robot.point_x  ).to eq 2
+    expect(@toy_robot.point_y  ).to eq 2
     expect(@toy_robot.facing_at).to eq "SOUTH"
     
     # turn left again
     @toy_robot.execute_left_command
     
-    expect(@toy_robot.point_x  ).to eq 0
-    expect(@toy_robot.point_y  ).to eq 0
+    expect(@toy_robot.point_x  ).to eq 2
+    expect(@toy_robot.point_y  ).to eq 2
     expect(@toy_robot.facing_at).to eq "EAST"
     
     # turn left again
     @toy_robot.execute_left_command
     
-    expect(@toy_robot.point_x  ).to eq 0
-    expect(@toy_robot.point_y  ).to eq 0
+    expect(@toy_robot.point_x  ).to eq 2
+    expect(@toy_robot.point_y  ).to eq 2
     expect(@toy_robot.facing_at).to eq "NORTH"
   end
+  
+  it "should be able to successfully call execute_right_command and the robot will be facing at the right direction" do
+    
+    
+    # set the position at middle of the table
+    @toy_robot.execute_place_command(2, 2, "north")
+    
+    # turn right
+    @toy_robot.execute_right_command
+    
+    expect(@toy_robot.point_x  ).to eq 2
+    expect(@toy_robot.point_y  ).to eq 2
+    expect(@toy_robot.facing_at).to eq "EAST"
+    
+    # turn right again
+    @toy_robot.execute_right_command
+    
+    expect(@toy_robot.point_x  ).to eq 2
+    expect(@toy_robot.point_y  ).to eq 2
+    expect(@toy_robot.facing_at).to eq "SOUTH"
+    
+    # turn right again
+    @toy_robot.execute_right_command
+    
+    expect(@toy_robot.point_x  ).to eq 2
+    expect(@toy_robot.point_y  ).to eq 2
+    expect(@toy_robot.facing_at).to eq "WEST"
+    
+    # turn right again
+    @toy_robot.execute_right_command
+    
+    expect(@toy_robot.point_x  ).to eq 2
+    expect(@toy_robot.point_y  ).to eq 2
+    expect(@toy_robot.facing_at).to eq "NORTH"
+  end  
 end
