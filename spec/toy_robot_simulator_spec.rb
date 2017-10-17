@@ -6,9 +6,19 @@ describe ToyRobotSimulator do
     @toy_robot = ToyRobotSimulator.new
   end  
   
-  it "be able proccess a valid 'place' command" do
-    command = "place 0,0,north"  
-    expect(@toy_robot.process_command(command)).to eq true
+  it "be able validate valid commands" do
+    valid_commands = [
+      "PLACE 0,0,NORTH",
+      "MOVE",
+      "LEFT",
+      "RIGHT",
+      "REPORT",
+      "QUIT"
+    ]
+    
+    valid_commands.each do |command|
+      expect(@toy_robot.process_command(command)).to eq true  
+    end
   end
 
 end
