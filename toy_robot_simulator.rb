@@ -25,23 +25,24 @@ class ToyRobotSimulator
   end
   
   def process_command(command)
+    validity = false
     command.downcase!
     
-    if command.scan(/^place/i).first == "place"
-      return true
+    if command.scan(/^PLACE\s\d{1},\d{1},(NORTH|SOUTH|WEST|EAST)/i).empty? == false
+      validity = true
     elsif command.scan(/^move/i).first == "move"  
-      return true
+      validity = true
     elsif command.scan(/^left/i).first == "left"
-      return true
+      validity = true
     elsif command.scan(/^right/i).first == "right"
-      return true  
+      validity = true 
     elsif command.scan(/^report/i).first == "report"
-      return true
+      validity = true
     elsif command.scan(/^quit/i).first == "quit" 
-      return true
-    else
-      return false
-    end           
+      validity = true
+    end
+    
+    return validity       
   end  
   
 end
