@@ -96,7 +96,7 @@ class ToyRobotSimulator
     if (0..4).cover?(point_x) && (0..4).cover?(point_y)
 
       # make sure the value of facing_at is a valid compass direction
-      if ["north", "south", "west", "east"].include?(facing_at.downcase)
+      if ["NORTH", "SOUTH", "WEST", "EAST"].include?(facing_at.upcase)
         @point_x   = point_x
         @point_y   = point_y
         @facing_at = facing_at.upcase
@@ -108,7 +108,40 @@ class ToyRobotSimulator
   end
   
   def execute_move_command 
-    puts "@DEBUG #{__LINE__}    Running move_command..."
+    status = false
+    if @point_x.nil? == false && @point_y.nil? == false
+      direction = @facing_at.upcase
+      case direction
+      when "NORTH"
+        value = @point_y
+        if (0..4).cover?(value + 1)
+          @point_y += 1
+          status = true
+        end  
+      when "SOUTH"
+        value = @point_y
+        if (0..4).cover?(value - 1)
+          @point_y -= 1
+          status = true
+        end    
+      when "WEST"
+        value = @point_x
+        if (0..4).cover?(value - 1)
+          @point_x -= 1
+          status = true
+        end  
+      when "EAST"      
+        value = @point_x
+        if (0..4).cover?(value + 1)
+          @point_x += 1
+          status = true
+        end  
+      end
+        
+      status = true
+    end    
+
+    return status
   end
 
   def execute_left_command 

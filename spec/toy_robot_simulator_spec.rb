@@ -169,4 +169,85 @@ describe ToyRobotSimulator do
     
     expect(result).to eq false
   end
+  
+  it "should be able to successfully call execute_move_command without falling off the table" do
+    
+    # set the position to the bottom left corner and have it facing north
+    @toy_robot.execute_place_command(0, 0, "north")
+    
+    # step 4 units facing north
+    for step in 1..4 
+      @toy_robot.execute_move_command
+    end
+    
+    expect(@toy_robot.point_x).to eq 0
+    expect(@toy_robot.point_y).to eq 4
+    
+    # move again 1 step facing north
+    @toy_robot.execute_move_command
+    
+    # expect not to fall off the table
+    expect(@toy_robot.point_x).to eq 0
+    expect(@toy_robot.point_y).to eq 4
+    
+    
+    
+    # set the position to the top most left corner and have it facing east
+    @toy_robot.execute_place_command(0, 4, "east")
+    
+    # step 4 units facing east
+    for step in 1..4 
+      @toy_robot.execute_move_command
+    end
+    
+    expect(@toy_robot.point_x).to eq 4
+    expect(@toy_robot.point_y).to eq 4
+    
+    # move again 1 step facing east
+    @toy_robot.execute_move_command
+    
+    # expect not to fall off the table
+    expect(@toy_robot.point_x).to eq 4
+    expect(@toy_robot.point_y).to eq 4
+    
+    
+    
+    # set the position to the top most right corner and have it facing south
+    @toy_robot.execute_place_command(4, 4, "south")
+    
+    # step 4 units facing south
+    for step in 1..4 
+      @toy_robot.execute_move_command
+    end
+    
+    expect(@toy_robot.point_x).to eq 4
+    expect(@toy_robot.point_y).to eq 0
+    
+    # move again 1 step facing south
+    @toy_robot.execute_move_command
+    
+    # expect not to fall off the table
+    expect(@toy_robot.point_x).to eq 4
+    expect(@toy_robot.point_y).to eq 0
+    
+    
+    
+    # set the position to the bottom right most corner and have it facing west
+    @toy_robot.execute_place_command(4, 0, "west")
+    
+    # step 4 units facing west
+    for step in 1..4 
+      @toy_robot.execute_move_command
+    end
+    
+    expect(@toy_robot.point_x).to eq 0
+    expect(@toy_robot.point_y).to eq 0
+    
+    # move again 1 step facing west
+    @toy_robot.execute_move_command
+    
+    # expect not to fall off the table
+    expect(@toy_robot.point_x).to eq 0
+    expect(@toy_robot.point_y).to eq 0
+  end
 end
