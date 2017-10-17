@@ -250,4 +250,38 @@ describe ToyRobotSimulator do
     expect(@toy_robot.point_x).to eq 0
     expect(@toy_robot.point_y).to eq 0
   end
+  
+  it "should be able to successfully call execute_left_command and face at the correct direction" do
+    
+    # set the position to the bottom left corner and have it facing north
+    @toy_robot.execute_place_command(0, 0, "north")
+    
+    # turn left
+    @toy_robot.execute_left_command
+    
+    expect(@toy_robot.point_x  ).to eq 0
+    expect(@toy_robot.point_y  ).to eq 0
+    expect(@toy_robot.facing_at).to eq "WEST"
+    
+    # turn left again
+    @toy_robot.execute_left_command
+    
+    expect(@toy_robot.point_x  ).to eq 0
+    expect(@toy_robot.point_y  ).to eq 0
+    expect(@toy_robot.facing_at).to eq "SOUTH"
+    
+    # turn left again
+    @toy_robot.execute_left_command
+    
+    expect(@toy_robot.point_x  ).to eq 0
+    expect(@toy_robot.point_y  ).to eq 0
+    expect(@toy_robot.facing_at).to eq "EAST"
+    
+    # turn left again
+    @toy_robot.execute_left_command
+    
+    expect(@toy_robot.point_x  ).to eq 0
+    expect(@toy_robot.point_y  ).to eq 0
+    expect(@toy_robot.facing_at).to eq "NORTH"
+  end
 end
