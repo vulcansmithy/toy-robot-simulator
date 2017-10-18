@@ -7,6 +7,17 @@ end
 
 class ToyRobotSimulator
   
+  NORTH_DIRECTION = "NORTH"
+  SOUTH_DIRECTION = "SOUTH"
+   WEST_DIRECTION = "WEST"
+   EAST_DIRECTION = "EAST"
+   
+    MOVE_COMMAND  = "move" 
+    LEFT_COMMAND  = "left"
+   RIGHT_COMMAND  = "right"
+  REPORT_COMMAND  = "report" 
+    QUIT_COMMAND  = "quit"
+  
   attr_reader :point_x
   attr_reader :point_y
   attr_reader :facing_at
@@ -18,7 +29,7 @@ class ToyRobotSimulator
   end  
   
   def main
-    while (entered_command = command_prompt("('QUIT' to exit): ")).downcase != "quit" do
+    while (entered_command = command_prompt("('QUIT' to exit): ")).downcase != QUIT_COMMAND do
       processed_result = process_command(entered_command)
        if processed_result[:validity]
         case processed_result[:command]
@@ -72,19 +83,19 @@ class ToyRobotSimulator
         result = { validity: false }
       end 
 
-    elsif command.scan(/^move/i).first == "move"
+    elsif command.scan(/^move/i).first == MOVE_COMMAND
       result = { validity: true, command: :move }
 
-    elsif command.scan(/^left/i).first == "left"
+    elsif command.scan(/^left/i).first == LEFT_COMMAND
       result = { validity: true, command: :left }
 
-    elsif command.scan(/^right/i).first == "right"
+    elsif command.scan(/^right/i).first == RIGHT_COMMAND
       result = { validity: true, command: :right }
 
-    elsif command.scan(/^report/i).first == "report"
+    elsif command.scan(/^report/i).first == REPORT_COMMAND
       result = { validity: true, command: :report }
 
-    elsif command.scan(/^quit/i).first == "quit"
+    elsif command.scan(/^quit/i).first == QUIT_COMMAND
       result = { validity: true, command: :quit }
     end
     
@@ -96,7 +107,7 @@ class ToyRobotSimulator
     if (0..4).cover?(point_x) && (0..4).cover?(point_y)
 
       # make sure the value of facing_at is a valid compass direction
-      if ["NORTH", "SOUTH", "WEST", "EAST"].include?(facing_at.upcase)
+      if [NORTH_DIRECTION, SOUTH_DIRECTION, WEST_DIRECTION, EAST_DIRECTION].include?(facing_at.upcase)
         @point_x   = point_x
         @point_y   = point_y
         @facing_at = facing_at.upcase
@@ -112,25 +123,25 @@ class ToyRobotSimulator
     if @point_x.nil? == false && @point_y.nil? == false
       direction = @facing_at.upcase
       case direction
-      when "NORTH"
+      when NORTH_DIRECTION
         value = @point_y
         if (0..4).cover?(value + 1)
           @point_y += 1
           status = true
         end  
-      when "SOUTH"
+      when SOUTH_DIRECTION
         value = @point_y
         if (0..4).cover?(value - 1)
           @point_y -= 1
           status = true
         end    
-      when "WEST"
+      when WEST_DIRECTION
         value = @point_x
         if (0..4).cover?(value - 1)
           @point_x -= 1
           status = true
         end  
-      when "EAST"      
+      when EAST_DIRECTION     
         value = @point_x
         if (0..4).cover?(value + 1)
           @point_x += 1
@@ -148,17 +159,17 @@ class ToyRobotSimulator
     status = false
     if @point_x.nil? == false && @point_y.nil? == false
       case @facing_at
-      when "NORTH"
-        @facing_at = "WEST"
+      when NORTH_DIRECTION
+        @facing_at = WEST_DIRECTION
         status = true
-      when "WEST"
-        @facing_at = "SOUTH"
+      when WEST_DIRECTION
+        @facing_at = SOUTH_DIRECTION
         status = true
-      when "SOUTH"
-        @facing_at = "EAST"   
+      when SOUTH_DIRECTION
+        @facing_at = EAST_DIRECTION   
         status = true
-      when "EAST"
-        @facing_at = "NORTH"
+      when EAST_DIRECTION
+        @facing_at = NORTH_DIRECTION
         status = true
       end     
     end    
@@ -170,17 +181,17 @@ class ToyRobotSimulator
     status = false
     if @point_x.nil? == false && @point_y.nil? == false
       case @facing_at
-      when "NORTH"
-        @facing_at = "EAST"
+      when NORTH_DIRECTION
+        @facing_at = EAST_DIRECTION
         status = true
-      when "EAST"
-        @facing_at = "SOUTH"
+      when EAST_DIRECTION
+        @facing_at = SOUTH_DIRECTION
         status = true
-      when "SOUTH"
-        @facing_at = "WEST"   
+      when SOUTH_DIRECTION
+        @facing_at = WEST_DIRECTION   
         status = true
-      when "WEST"
-        @facing_at = "NORTH"
+      when WEST_DIRECTION
+        @facing_at = NORTH_DIRECTION
         status = true
       end     
     end    

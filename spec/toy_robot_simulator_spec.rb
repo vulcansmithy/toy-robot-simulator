@@ -287,7 +287,6 @@ describe ToyRobotSimulator do
   
   it "should be able to successfully call execute_right_command and the robot will be facing at the right direction" do
     
-    
     # set the position at middle of the table
     @toy_robot.execute_place_command(2, 2, "north")
     
