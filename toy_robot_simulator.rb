@@ -7,16 +7,18 @@ end
 
 class ToyRobotSimulator
   
-  NORTH_DIRECTION = "NORTH"
-  SOUTH_DIRECTION = "SOUTH"
-   WEST_DIRECTION = "WEST"
-   EAST_DIRECTION = "EAST"
+  # note the purpose of the unless statement is to silent the "warning: already initialized constant" message
+  NORTH_DIRECTION = "NORTH"  unless const_defined?(:NORTH_DIRECTION)
+  SOUTH_DIRECTION = "SOUTH"  unless const_defined?(:SOUTH_DIRECTION)
+   WEST_DIRECTION = "WEST"   unless const_defined?(:WEST_DIRECTION )
+   EAST_DIRECTION = "EAST"   unless const_defined?(:EAST_DIRECTION )
    
-    MOVE_COMMAND  = "move" 
-    LEFT_COMMAND  = "left"
-   RIGHT_COMMAND  = "right"
-  REPORT_COMMAND  = "report" 
-    QUIT_COMMAND  = "quit"
+   PLACE_COMMAND  = "place"  unless const_defined?(:PLACE_COMMAND  )
+    MOVE_COMMAND  = "move"   unless const_defined?(:MOVE_COMMAND   )
+    LEFT_COMMAND  = "left"   unless const_defined?(:LEFT_COMMAND   )
+   RIGHT_COMMAND  = "right"  unless const_defined?(:RIGHT_COMMAND  )
+  REPORT_COMMAND  = "report" unless const_defined?(:REPORT_COMMAND )
+    QUIT_COMMAND  = "quit"   unless const_defined?(:QUIT_COMMAND   )
   
   attr_reader :point_x
   attr_reader :point_y
@@ -33,15 +35,15 @@ class ToyRobotSimulator
       processed_result = process_command(entered_command)
        if processed_result[:validity]
         case processed_result[:command]
-        when :place
+        when PLACE_COMMAND.to_sym
           execute_place_command(processed_result[:point_x], processed_result[:point_y], processed_result[:facing_at])
-        when :move
+        when MOVE_COMMAND.to_sym
           execute_move_command
-        when :left
+        when LEFT_COMMAND.to_sym
           execute_left_command
-        when :right
+        when RIGHT_COMMAND.to_sym
           execute_right_command
-        when :report
+        when REPORT_COMMAND.to_sym
           execute_report_command
         end
       end  
@@ -84,19 +86,19 @@ class ToyRobotSimulator
       end 
 
     elsif command.scan(/^move/i).first == MOVE_COMMAND
-      result = { validity: true, command: :move }
+      result = { validity: true, command: MOVE_COMMAND.to_sym }
 
     elsif command.scan(/^left/i).first == LEFT_COMMAND
-      result = { validity: true, command: :left }
+      result = { validity: true, command: LEFT_COMMAND.to_sym }
 
     elsif command.scan(/^right/i).first == RIGHT_COMMAND
-      result = { validity: true, command: :right }
+      result = { validity: true, command: RIGHT_COMMAND.to_sym }
 
     elsif command.scan(/^report/i).first == REPORT_COMMAND
-      result = { validity: true, command: :report }
+      result = { validity: true, command: REPORT_COMMAND.to_sym }
 
     elsif command.scan(/^quit/i).first == QUIT_COMMAND
-      result = { validity: true, command: :quit }
+      result = { validity: true, command: QUIT_COMMAND.to_sym }
     end
     
     return result      
