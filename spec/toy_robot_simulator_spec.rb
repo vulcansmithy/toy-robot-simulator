@@ -318,4 +318,17 @@ describe ToyRobotSimulator do
     expect(@toy_robot.point_y  ).to eq 2
     expect(@toy_robot.facing_at).to eq "NORTH"
   end  
+  
+  it "should perfom Example A as specified in the PDF document" do
+      
+    expect(@toy_robot.execute_place_command(0, 0, "north")).to eq true
+    
+    expect(@toy_robot.execute_move_command).to eq true  
+    
+    expect(@toy_robot.execute_report_command).to eq true 
+    
+    expect(@toy_robot.point_x  ).to eq 0
+    expect(@toy_robot.point_y  ).to eq 1
+    expect(@toy_robot.facing_at).to eq "NORTH"
+  end
 end
