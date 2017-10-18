@@ -76,7 +76,7 @@ class ToyRobotSimulator
       if (0..4).cover?(point_x) && (0..4).cover?(point_y) && facing_at.nil? == false
         result = { 
           validity:  true, 
-          command:   :place, 
+          command:   PLACE_COMMAND.to_sym, 
           point_x:   point_x, 
           point_y:   point_y, 
           facing_at: facing_at, 
